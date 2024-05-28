@@ -1,0 +1,86 @@
+#colorbar {
+  width: 25px;
+  height: 400px;
+  border-radius: 2px;
+  position: absolute;
+  background: linear-gradient(to bottom, #FF01FF, #01FFFF);
+  display: none;
+}
+
+.colorbar-label {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-size: 12px;
+}
+
+.colorbar-label-high {
+  top: 0;
+}
+
+.colorbar-label-low {
+  bottom: 0;
+}
+
+.unit {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  color: #0b0b0b;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.menu-button {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  top: 0px;
+  justify-content: center; 
+  align-items: center; 
+  padding: 0;
+  margin: 0;
+  border: 2px solid #a39999; /* 添加灰色边框 */
+  background: #c1c1b9; 
+  cursor: pointer;  
+  font-size: 14px;     
+  font-weight: bold;  
+  color: #333;         
+}
+
+.menu-button:hover{
+  background: #e0e0e0;
+}
+
+
+#chart-container {
+  width: 600px;
+  height: 400px;
+}
+
+#close-button {
+  width: 50px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  left: 540px;
+  z-index: 999;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: #c1c1b9; 
+  cursor: pointer;  
+  font-size: 14px;     
+  font-weight: bold;  
+  color: #333;         
+  border-radius: 4px; 
+}
+
+#close-button:hover {
+  background: #e0e0e0; /* 悬停时背景颜色 */
+}
