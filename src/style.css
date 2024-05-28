@@ -1,10 +1,18 @@
+#chart-container {
+  width: 600px;
+  height: 400px;
+  position: fixed;
+  top: 100px; /* 距离顶部的距离 */
+  left: 20px; /* 距离右边的距离 */
+  display: none;
+  z-index: 999;
+}
+
 #colorbar {
   width: 25px;
-  height: 400px;
+  height: 200px;
   border-radius: 2px;
   position: absolute;
-  background: linear-gradient(to bottom, #FF01FF, #01FFFF);
-  display: none;
 }
 
 .colorbar-label {
@@ -28,44 +36,49 @@
   top: 50%;
   left: 30px;
   transform: translateY(-50%);
-  color: #0b0b0b;
+  color: black;
   font-size: 15px;
   font-weight: bold;
 }
-
 .menu-button {
   width: 100px;
   height: 30px;
   position: absolute;
-  top: 0px;
-  justify-content: center; 
-  align-items: center; 
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
-  border: 2px solid #a39999; /* 添加灰色边框 */
-  background: #c1c1b9; 
-  cursor: pointer;  
-  font-size: 14px;     
-  font-weight: bold;  
-  color: #333;         
+  border: 2px solid #000; /* 添加黑色边框 */
+  background-color: #fff; /* 白色背景 */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000; /* 黑色文字 */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
-.menu-button:hover{
-  background: #e0e0e0;
+.menu-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-
-#chart-container {
-  width: 600px;
-  height: 400px;
-}
 
 #close-button {
+  left: 540px;
+}
+
+#download-button {
+  left: 480px;
+}
+
+.chart-button{
   width: 50px;
   height: 20px;
   position: absolute;
   top: 5px;
-  left: 540px;
   z-index: 999;
   display: flex;
   justify-content: center; 
@@ -81,6 +94,15 @@
   border-radius: 4px; 
 }
 
-#close-button:hover {
+.chart-button:hover{
   background: #e0e0e0; /* 悬停时背景颜色 */
+}
+
+#title {
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 5px;
 }

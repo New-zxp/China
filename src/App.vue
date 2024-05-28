@@ -5,7 +5,7 @@
 <script>
 import mapboxgl from 'mapbox-gl';
 import { createChart } from './js/chartCreator.js';
-import { initializeButton, initializeCloseButton,createButton} from './js/button.js';
+import { initializeButton, initializeCloseButton,createButton,downloadButton} from './js/button.js';
 import { initializeColorbar } from './js/colorbar.js';
 
 export default {
@@ -16,7 +16,7 @@ export default {
     
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/satellite-v9', // Mapbox 样式 URL
+      style: 'mapbox://styles/mapbox/basic-v9', // Mapbox 样式 URL
       center: [104, 35], // 中心坐标
       zoom: 3.1, // 初始缩放级别
       minZoom: 2.8,
@@ -63,16 +63,13 @@ export default {
               layout: {},
               paint: {
                 'line-color': '#000', // 边界颜色
-                'line-width': 2 // 边界宽度
+                'line-width': 0.1 // 边界宽度
               }
             });
 
             //点击省份时，出现对应图表
             map.on('click', layerId, (e) => {
               const provinceName = e.features[0].properties.name;
-
-              const colorbar = document.getElementById('colorbar');
-              colorbar.style.display = 'none';
 
               Promise.all([
                 fetch('./src/data/land_water.json').then(response => response.json()),
@@ -93,6 +90,7 @@ export default {
 
                   //添加关闭按钮
                   initializeCloseButton(map,chart,'rate');
+                  downloadButton("download-button","下载",timeSeriesData,provinceName);
                 })
                 .catch(error => console.error('Error loading the time series data:', error));
             });
@@ -116,18 +114,46 @@ export default {
         data: './src/data/rate.json'
       });
 
+      // 添加格九段线
+      map.addSource('jd', {
+        type: 'geojson',
+        data: './src/data/九段线.json'
+      });
+
+      map.addLayer({
+        'id': 'jdFill',
+        'type': 'fill',
+        'source': 'jd',
+        'layout': {},
+        'paint': {
+            'fill-color': 'black',
+            'fill-opacity': 0.5 // 填充透明度
+          }
+        });
+
+      map.addLayer({
+            'id': 'jdLine',
+            'type': 'line',
+            'source': 'jd',
+            'layout': {},
+            'paint': {
+                'line-color': 'black',
+                'line-width': 2 // 边界宽度
+            }
+        });
+
       //添加colorbar
-      const colors = ['#FF01FF', '#01FFFF'];
-      const intervals = [-5, 3];
-      const labels = ['-5', '3']; 
+      const colors = ['red', 'white','blue'];
+      const intervals = [-2.5,0,2.5];
+      const labels = ['-2.5', '2.5']; 
       const unit = 'cm/yr'; 
-      const lon = 68;
-      const lat = 38;
+      const lon = 125;
+      const lat = 30;
       const colorbarWidth = 25;
-      const colorbarHeight = 400;
+      const colorbarHeight = 200;
       const colorbarId = 'colorbar';
 
-      initializeColorbar(map, colorbarId,intervals, labels, unit, lon, lat, colorbarWidth, colorbarHeight);
+      initializeColorbar(map, colorbarId,colors,intervals, labels, unit, lon, lat, colorbarWidth, colorbarHeight,"全国水储量变化速度分布图");
 
       // 添加速度图层
       map.addLayer({
@@ -142,18 +168,16 @@ export default {
             ['get', '速度'],
             intervals[0], colors[0],
             intervals[1], colors[1],
+            intervals[2], colors[2],
           ]
         },
-        layout: {
-          visibility: 'none' // 不可见
-        }
       });
       
-      createButton(map, "land-water", "陆地水储量",400);
-      createButton(map, "soil-moisture", "土壤湿度",300);
-      createButton(map, "groundwater", "地下水",200);
-      createButton(map, "surface-water", "地表水",100);
-      createButton(map, "ice-snow", "冰雪储量",0);
+      createButton(map, "land-water", "陆地水储量",0);
+      createButton(map, "soil-moisture", "土壤湿度",101);
+      createButton(map, "groundwater", "地下水",202);
+      createButton(map, "surface-water", "地表水",303);
+      createButton(map, "ice-snow", "冰雪储量",404);
 
       initializeButton(map, "land-water", 'rate', 'colorbar');
 
