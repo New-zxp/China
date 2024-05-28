@@ -25,7 +25,7 @@ export function createChart(containerId, provinceName, timeSeriesData, fittedDat
 
   const option = {
     title: {
-      text: `${provinceName} - 陆地水变化时间序列`,
+      text: `${provinceName}`,
       left: 'center',
       top: '10px',
     },
@@ -89,7 +89,7 @@ export function createChart(containerId, provinceName, timeSeriesData, fittedDat
         animation: false,
         endLabel: {
           show: true,
-          formatter: '陆地水变化趋势速度：' + slope.toFixed(2) + '(cm/yr)',
+          formatter: '陆地水储量变化速度：' + slope.toFixed(2) + ' cm/yr',
           color: 'black',
           fontSize: 13,
           fontWeight: 'bold'

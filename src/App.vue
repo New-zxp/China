@@ -17,8 +17,8 @@ export default {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/basic-v9', // Mapbox 样式 URL
-      center: [104, 35], // 中心坐标
-      zoom: 3.1, // 初始缩放级别
+      center: [110, 38], // 中心坐标
+      zoom: 3.5, // 初始缩放级别
       minZoom: 2.8,
       maxZoom: 4.8,
       doubleClickZoom: false,
@@ -145,7 +145,7 @@ export default {
       //添加colorbar
       const colors = ['red', 'white','blue'];
       const intervals = [-2.5,0,2.5];
-      const labels = ['-2.5', '2.5']; 
+      const labels = ['-2.0','-1.0',0,'1','2']; 
       const unit = 'cm/yr'; 
       const lon = 125;
       const lat = 30;
@@ -174,21 +174,13 @@ export default {
       });
       
       createButton(map, "land-water", "陆地水储量",0);
-      createButton(map, "soil-moisture", "土壤湿度",101);
-      createButton(map, "groundwater", "地下水",202);
-      createButton(map, "surface-water", "地表水",303);
-      createButton(map, "ice-snow", "冰雪储量",404);
+      createButton(map, "soil-moisture", "土壤湿度",100);
+      createButton(map, "groundwater", "地下水",200);
+      createButton(map, "surface-water", "地表水",300);
+      createButton(map, "ice-snow", "冰雪储量",400);
 
       initializeButton(map, "land-water", 'rate', 'colorbar');
 
-      // 禁止colorbar大小随地图缩放而改变
-      map.on('zoom', () => {
-        const zoomLevel = map.getZoom();
-        // 更新colorbar的大小，但不改变其位置
-        const colorbar = document.getElementById(colorbarId);
-        colorbar.style.width = `${colorbarWidth * (zoomLevel / 3.3)}px`;
-        colorbar.style.height = `${colorbarHeight * (zoomLevel / 3.3)}px`;
-      });
     });
   }
 }
