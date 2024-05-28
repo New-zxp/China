@@ -102,9 +102,9 @@
   position: absolute;
   font-weight: bold;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #DEDEDE;
   padding: 5px;
   border-radius: 5px;
   font-family: "KaiTi";
-  font-size: 17px;
+  font-size: 25px;
 }

@@ -16,8 +16,8 @@ export function initializeColorbar(map, colorbarId, colors, intervals, labels, u
   document.body.appendChild(titleElement);
   const titlePosition = map.project([lon - 28, lat + 14]);
   titleElement.style.position = 'absolute';
-  titleElement.style.left = `${titlePosition.x}px`;
-  titleElement.style.top = `${titlePosition.y - 30}px`;
+  titleElement.style.left = `${titlePosition.x - 30}px`;
+  titleElement.style.top = `${titlePosition.y - 80}px`;
 
   const center = map.project([lon, lat]);
   colorbar.style.position = 'absolute';
@@ -29,8 +29,8 @@ export function initializeColorbar(map, colorbarId, colors, intervals, labels, u
     colorbar.style.left = `${center.x - colorbarWidth / 2}px`;
     colorbar.style.top = `${center.y - colorbarHeight / 2}px`;
     const titlePosition = map.project([lon - 28, lat + 14]);
-    titleElement.style.left = `${titlePosition.x}px`;
-    titleElement.style.top = `${titlePosition.y - 30}px`; // 调整标题位置，使其位于指定坐标上方
+    titleElement.style.left = `${titlePosition.x - 30}px`;
+    titleElement.style.top = `${titlePosition.y - 80}px`; // 调整标题位置，使其位于指定坐标上方
   });
 
 // 添加 colorbar 标签
@@ -63,5 +63,7 @@ labels.forEach((label, index) => {
       labels.forEach((label, index) => {
         label.style.bottom = `${(index / (labels.length - 1)) * 183 * (zoomLevel / 3.5)}px`;
       });
+      const title = document.getElementById('title');
+      title.style.backgroundColor = 'rgba(222, 222, 222, 0)';
     });
 }
